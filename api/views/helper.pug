@@ -1,0 +1,120 @@
+doctype html
+html(lang="en")
+head
+    meta(charset="UTF-8")
+    meta( http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link( href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous")
+    link(href="/public/css/admin.css" rel="stylesheet")
+    title Administrador
+body
+    .row
+        div.col-lg-4
+            -var nombre = usuario
+            h1.text-primary Bienvenido #{nombre}
+        div.col-lg-8.d-flex.align-items-center.justify-content-around
+            form(action="/api/helper/get/pac" method="POST") 
+                div 
+                    label Buscar
+                    select(name="opcion" class="form-control")
+                        option(value="value0") Elija una opción 
+                        option(value="idCaso") Id del caso 
+                        option(value="numIdentificacion") Id Paciente 
+                    input(type="search" name="buscar" placeholder="Busqueda" class="form-control" id="buscar")
+                    button(type="submit" class="btn btn-primary") Buscar
+            a(class="btn btn-orange text-light" href="/api/helper/get") Obtener
+            a(class="btn btn-danger text-light" href="/api/home") Salir
+
+    div.w-100 
+    div.row.w-100.mt-4
+        div.col-lg-12.text-primary
+            h1.fs-4 Lista de usuarios
+            table(class="table text-primary")
+                thead
+                    tr  
+                        th(scope="col") Id
+                        th(scope="col") Primer Nombre
+                        th(scope="col") Segundo Nombre
+                        th(scope="col") Primer Apellido    
+                        th(scope="col") Segundo Apellido
+                        th(scope="col") Id Caso
+                        th(scope="col") Nacimiento
+                        th(scope="col") Direccion residencia
+                        th(scope="col") Direccion Trabajo
+                        th(scope="col") Resultado Examen 
+                        th(scope="col") Fecha de Examen
+                        td 
+                tbody       
+                    if lista
+                        each i in lista
+                            tr 
+                                td= i.numIdentificacion  
+                                td= i.Nombre1
+                                td= i.Nombre2
+                                td= i.Apellido1
+                                td= i.Apellido2
+                                td= i.idCaso   
+                                td= i.FechaNacimiento
+                                td= i.direccionRes
+                                td= i.direccionTrab 
+                                td= i.resExamen
+                                td= i.fechaExamen
+                                td
+                                    a(href="delete/"+i.numIdentificacion class="btn btn-danger") Eliminar
+    .w-100
+    .row
+        div(class="col-lg-12 m-3 text-primary" id="registrar")
+            h1.fs-4 Registrar Usuario
+            .row
+                form(action="/api/helper/reg" method="POST" class="d.flex")
+                    .row
+                        div.w-50
+                            label.form-label Tipo de documento
+                            select(class="form-control" name="idIdentificacion")
+                                option(value="value0") Elija una opción 
+                                option(value="value1") 1. Cedula de ciudadanía 
+                                option(value="value3") 2. Cedula de Extranjería
+                                option(value="value4") 3. Pasaporte
+                                option(value="value2") 4. Tarjeta de identidad
+                        div.w-50.mt-2   
+                            label.form-label Número de identificación
+                            input(class="form-control" type="text" name="numIdentificacion")
+                        div.w-50.mt-2
+                            label.form-label Primer nombre
+                            input(class="form-control" type="text" name="Nombre1")
+                        div.w-50.mt-2
+                            label.form-label Segundo nombre
+                            input(class="form-control" type="text" name="Nombre2")
+                        div.w-50.mt-2
+                            label.form-label Primer apellido
+                            input(class="form-control" type="text" name="Apellido1")
+                        div.w-50.mt-2
+                            label.form-label Segundo apellido
+                            input(class="form-control" type="text" name="Apellido2")
+                        div.w-50.mt-2
+                            label.form-label Fecha de Nacimiento
+                            input(class="form-control" type="date" name="date")
+                        div.w-50.mt-2
+                            label.form-label Id del caso
+                            input(class="form-control" type="text" name="idCaso")
+                        div.w-50
+                            label.form-label Sexo
+                            select(class="form-control" name="idSexo")
+                                option(value="value0") Elija una opción 
+                                option(value="value1") 1. Masculino
+                                option(value="value3") 2. Femenino
+                                option(value="value4") 3. No binario
+                        div.w-50.mt-2
+                                label.form-label Direccion de residencia
+                                input(class="form-control" type="text" name="direccionRes")
+                        div.w-50.mt-2
+                                label.form-label Direccion de trabajo
+                                input(class="form-control" type="text" name="direccionTrab")
+                        div.w-50.mt-2
+                                label.form-label Fecha de Examen
+                                input(class="form-control" type="date" name="fechaExamen")
+                        div.w-50.mt-2
+                            label.form-label Resultado del examen
+                            input(class="form-control" type="text" name="resExamen")
+                        div.mt-2.w-25.mx-auto
+                            button.form-control.btn.btn-block.btn-orange.text-light Registrar

@@ -1,0 +1,15 @@
+body{
+    background-color: #e7e6fc;
+}
+.btn-orange{
+    background-color: #dd7c1b;
+}
+.fondo-icon{
+    background-color: #2b007b;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 7px;
+}
+.text-primary{
+    color: #2b007b !important
+}
