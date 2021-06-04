@@ -13,3 +13,8 @@ body{
 .text-primary{
     color: #2b007b !important
 }
+.fondo{
+    background-image: url(../img/background.png);
+    background-size: cover;
+    height: 100vh;
+}

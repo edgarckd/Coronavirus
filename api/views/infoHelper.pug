@@ -1,0 +1,53 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link( href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous")
+        link(href="/public/css/admin.css" rel="stylesheet")
+        title Editar o Añadir Registros
+    body 
+        div.row.w-100.mt-4
+            div.col-lg-12.text-primary
+                h1.fs-4 Seguimiento de casos
+                table(class="table text-primary")
+                    thead
+                        tr  
+                            th(scope="col") Id
+                            th(scope="col") Primer Nombre
+                            th(scope="col") Primer Apellido    
+                            th(scope="col") Id Caso
+                            th(scope="col") Resultado Examen 
+                            th(scope="col") Ultimo Examen
+                            th(scope="col") Estado
+                            td 
+                    tbody       
+                        if result
+                            each i in result
+                                tr 
+                                    td= i.numIdentificacion  
+                                    td= i.primerNombre
+                                    td= i.primerApellido
+                                    td= i.idCaso   
+                                    td= i.resExamen
+                                    td= i.FechaExamen
+                                    td= i.Estado
+                div.row
+                    div.w-50.mt-2   
+                        label.form-label Número de identificación
+                        input(class="form-control" type="text" name="numIdentificacion")
+                    div.w-50.mt-2
+                        label.form-label Fecha de último examen
+                        input(class="form-control" type="date" name="FechaExamen")
+                    div.w-50.mt-2
+                        label.form-label Id del caso
+                        input(class="form-control" type="text" name="idCaso")
+                    div.w-50.mt-2
+                        label.form-label Resultado del examen
+                        input(class="form-control" type="text" name="resExamen")
+                    div.w-50.mt-2
+                        label.form-label Estado
+                        input(class="form-control" type="text" name="Estado")
+                    div.mt-2.w-25.mx-auto
+                        button.form-control.btn.btn-block.btn-orange.text-light Registrar                 

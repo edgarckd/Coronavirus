@@ -34,31 +34,26 @@ body
                     tr  
                         th(scope="col") Id
                         th(scope="col") Primer Nombre
-                        th(scope="col") Segundo Nombre
                         th(scope="col") Primer Apellido    
-                        th(scope="col") Segundo Apellido
                         th(scope="col") Id Caso
                         th(scope="col") Nacimiento
                         th(scope="col") Direccion residencia
                         th(scope="col") Direccion Trabajo
-                        th(scope="col") Resultado Examen 
                         th(scope="col") Fecha de Examen
-                        td 
+                        th(scope="col") Estado
                 tbody       
                     if lista
                         each i in lista
                             tr 
                                 td= i.numIdentificacion  
                                 td= i.Nombre1
-                                td= i.Nombre2
                                 td= i.Apellido1
-                                td= i.Apellido2
                                 td= i.idCaso   
                                 td= i.FechaNacimiento
                                 td= i.direccionRes
                                 td= i.direccionTrab 
-                                td= i.resExamen
                                 td= i.fechaExamen
+                                td= i.Estado
                                 td
                                     a(href="delete/"+i.numIdentificacion class="btn btn-danger") Eliminar
     .w-100
@@ -116,5 +111,8 @@ body
                         div.w-50.mt-2
                             label.form-label Resultado del examen
                             input(class="form-control" type="text" name="resExamen")
+                        div.w-50.mt-2
+                            label.form-label Estado
+                            input(class="form-control" type="text" name="Estado")
                         div.mt-2.w-25.mx-auto
                             button.form-control.btn.btn-block.btn-orange.text-light Registrar

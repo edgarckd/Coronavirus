@@ -1,5 +1,5 @@
 const express = require('express')
-const controller = require('./controller')
+const ctl = require('../handleRegister/')
 
 const Controller = require('./index')
 
@@ -10,7 +10,6 @@ router.get('/get', (req, res, next) => {
         .then((lista) => {
             res.render('helper', {
                 lista,
-                usuario: req.cookies.usuario
             })
         })
         .catch(next)
@@ -26,16 +25,19 @@ router.get('/delete/:id', (req, res, next) => {
     console.log(id);
     Controller.remove(req.params.id)
     .then(() =>{
-        res.redirect('/helper')
+        res.redirect('/helper/')
     }).catch(next)
 })
 router.post('/get/pac', (req, res, next)=>{
-    let opcion = req.body.opcion
+    let opcion = req.body.opcion    
     let data = req.body.buscar
-    Controller.get(opcion, data)
+    ctl.get(opcion, data)
     .then((result) =>{
-        res.send(result)
+        res.render('infoHelper', {result})
     })
 })
+/*router.get('/info', (req, res, next)=>{
+    res.render('infoHelper')
+})*/
 
 module.exports = router

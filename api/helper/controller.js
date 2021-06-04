@@ -1,3 +1,5 @@
+const handle = require('../handleRegister')
+
 module.exports = function (injecStore) {
     let store = injecStore
 
@@ -27,6 +29,19 @@ module.exports = function (injecStore) {
             direccionTrab: body.direccionTrab,
             resExamen: body.resExamen,
             fechaExamen: body.fechaExamen,
+            Estado: body.Estado
+        }
+        let res = store.query('Estados', {numIdentificacion: paciente.numIdentificacion})
+        if (res !== null) {
+            await handle.upsert({
+                FechaExamen: paciente.fechaExamen,
+                resExamen: paciente.resExamen,
+                idCaso: paciente.idCaso,
+                numIdentificacion: paciente.numIdentificacion,
+                Estado: paciente.Estado,
+                primerNombre: paciente.Nombre1,
+                primerApellido: paciente.Apellido1,
+            })
         }
         if (body.idSexo === 'value1') {
             paciente.idSexo = 1
@@ -48,7 +63,11 @@ module.exports = function (injecStore) {
         return store.upsert(TABLE, paciente)
     }
     async function remove(id){
+        const data = await store.query('Estados', {numIdentificacion : id})
 
+        if (data){
+            store.remove('Estados', id)
+        }
         return store.remove(TABLE, id)
     }
     return {

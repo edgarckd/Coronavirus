@@ -9,7 +9,7 @@ module.exports = function (injecStore) {
         store = require('../../../store/dummy')
     }
 
-    async function login(username, password, res) {
+    async function login(username, password) {
         const data = await store.query(TABLA, {
             User: username,
             
